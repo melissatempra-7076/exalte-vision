@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>exalte Seasons</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Questrial&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a single page read top to bottom, a seasonal wheel as the visual anchor */
+  :root{
+    --cream:#F4F4EB; --paper:#EAEADF; --sage:#9FB386; --sage-deep:#7E9468;
+    --olive:#4C5036; --gold:#C49952; --ink:#3A392F; --soft:#6E6C5E; --line:#D9D4C3; --card:#F8F8F1;
+    --display:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --body:'Questrial', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color-scheme: light;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding-left:max(24px, env(safe-area-inset-left, 0px));padding-right:max(24px, env(safe-area-inset-right, 0px))}
+  h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--olive);line-height:1.15;text-wrap:balance}
+  h2{font-size:clamp(26px,3.2vw,34px);margin-bottom:14px}
+  h3{font-size:22px}
+  .eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  section{padding-block:44px}
+  .alt{background:var(--paper)}
+  p.lead{font-size:17.5px;color:var(--soft);max-width:680px}
+
+  /* hero */
+  .hero{padding-block:48px 40px;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+  .wordmark{font-family:var(--display);font-size:46px;color:var(--gold);line-height:1}
+  .hero h1{font-size:clamp(36px,5.2vw,58px);margin:14px 0 14px;font-weight:300}
+  .hero .tag{font-family:var(--display);font-style:italic;font-size:23px;color:var(--sage-deep)}
+  .wheel{width:100%;max-width:300px;justify-self:center}
+  .wheel text{font-family:var(--display)}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:20px}
+  .step .n{font-family:var(--display);font-size:28px;color:var(--gold);line-height:1}
+  .step h3{margin:6px 0 4px}
+  .step p{font-size:14.5px;color:var(--soft)}
+  .step.key{background:var(--sage);border-color:var(--sage)}
+  .step.key .n,.step.key h3,.step.key p{color:#fff}
+
+  /* two columns */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+  ul.list{list-style:none;margin-top:6px}
+  ul.list li{padding:10px 0;border-bottom:1px solid var(--line);font-size:15px}
+  ul.list li:last-child{border:0}
+  ul.list b{font-weight:400;font-family:var(--display);font-size:19px;color:var(--olive);display:block}
+
+  .figure{margin-top:18px;padding:18px 20px;border-left:2px solid var(--gold);background:var(--card);font-size:15px;color:var(--soft)}
+  .figure strong{font-family:var(--display);font-weight:500;font-size:24px;color:var(--olive)}
+
+  /* fit table */
+  .fit{width:100%;border-collapse:collapse;margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .fit td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+  .fit tr:last-child td{border:0}
+  .fit td:first-child{font-family:var(--display);font-size:19px;color:var(--olive);white-space:nowrap;width:34%}
+
+  /* path */
+  .path{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:20px;position:relative}
+  .path::before{content:"";position:absolute;left:0;right:0;top:6px;height:1px;background:var(--gold)}
+  .path div{padding-right:16px;position:relative}
+  .path i{display:block;width:13px;height:13px;border-radius:50%;background:var(--gold);margin-bottom:12px}
+  .path h3{font-size:20px}
+  .path p{font-size:14px;color:var(--soft)}
+
+  .close{background:var(--sage);color:#fff;text-align:center;padding-block:52px}
+  .close .line{font-family:var(--display);font-weight:300;font-size:clamp(26px,3.4vw,38px);line-height:1.25;max-width:760px;margin:0 auto}
+  .close .sign{font-family:var(--display);font-style:italic;font-size:26px;margin-top:20px}
+  .fine{padding-block:22px 34px;font-size:12.5px;color:var(--soft);text-align:center}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;gap:20px}
+    .wheel{max-width:230px}
+    .steps,.two{grid-template-columns:1fr}
+    .path{grid-template-columns:1fr 1fr;gap:22px 0}
+    .path::before{display:none}
+    .fit td:first-child{white-space:normal}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="wordmark">exalte</div>
+      <h1>exalte Seasons</h1>
+      <div class="tag">exalte creates the wellness. Hotels deliver it. Everyone is rewarded, season after season.</div>
+    </div>
+    <svg class="wheel" viewBox="0 0 300 300" role="img" aria-label="The four exalte Seasons: Ground, Rest, Rise and Renew">
+      <circle cx="150" cy="150" r="138" fill="none" stroke="#C49952" stroke-width="1"/>
+      <path d="M150 150 L150 12 A138 138 0 0 1 288 150 Z" fill="#9FB386" opacity=".9"/>
+      <path d="M150 150 L288 150 A138 138 0 0 1 150 288 Z" fill="#7E9468" opacity=".9"/>
+      <path d="M150 150 L150 288 A138 138 0 0 1 12 150 Z" fill="#C49952" opacity=".55"/>
+      <path d="M150 150 L12 150 A138 138 0 0 1 150 12 Z" fill="#D9D4C3"/>
+      <circle cx="150" cy="150" r="54" fill="#F4F4EB"/>
+      <text x="150" y="158" text-anchor="middle" font-size="26" fill="#C49952">exalte</text>
+      <text x="205" y="92" text-anchor="middle" font-size="20" fill="#fff">Rise</text>
+      <text x="205" y="218" text-anchor="middle" font-size="20" fill="#fff">Renew</text>
+      <text x="95" y="218" text-anchor="middle" font-size="20" fill="#4C5036">Ground</text>
+      <text x="95" y="92" text-anchor="middle" font-size="20" fill="#4C5036">Rest</text>
+    </svg>
+  </div>
+</div>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">The idea</div>
+    <h2>The "Les Mills" of hotel wellness</h2>
+    <p class="lead">Les Mills doesn't run gyms. It creates programs like BodyPump, releases fresh versions every quarter, certifies instructors at other people's gyms and charges a licence fee. exalte could do the same for hospitality: licensed seasonal wellness programs that hotels deliver with their own trained staff, under the exalte brand, with your house of practitioners as the creators.</p>
+
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Create</h3><p>Roster practitioners co-create each season: in-room rituals, group sessions, an 80/20 menu and a residency format.</p></div>
+      <div class="step"><div class="n">2</div><h3>Release</h3><p>Four exalte Seasons a year, from Winter "Rest" to Spring "Rise". Each launch is a PR moment.</p></div>
+      <div class="step"><div class="n">3</div><h3>License</h3><p>Hotels pay a monthly fee per property to run the exalte program.</p></div>
+      <div class="step"><div class="n">4</div><h3>Certify</h3><p>Hotel spa and wellness staff train as certified exalte Guides, refreshed each season.</p></div>
+      <div class="step"><div class="n">5</div><h3>Deliver</h3><p>Hotel staff run the everyday rituals. exalte practitioners lead the premium residencies and events.</p></div>
+      <div class="step key"><div class="n">6</div><h3>Reward</h3><p>Practitioners earn a royalty each time a hotel delivers their ritual, like a musician whose song is played.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow">Why it's commercial</div>
+      <h2>Recurring, scalable, renewable</h2>
+      <ul class="list">
+        <li><b>Recurring revenue</b>Monthly licence fees per property, like a subscription</li>
+        <li><b>Low cost per new hotel</b>Designed once, delivered by each hotel's own staff</li>
+        <li><b>Built-in renewal</b>A new season every quarter keeps hotels paying and guests returning</li>
+        <li><b>Many revenue lines</b>Licences, certification, ritual kits, residencies, corporate packages and representation</li>
+        <li><b>Not limited by your time</b>Growth no longer depends on practitioners being in the room</li>
+      </ul>
+      <div class="figure">For example, 30 hotels at $2,000 a month is <strong>$720,000 a year</strong> in recurring licence income, before any other revenue. Illustrative figures only.</div>
+    </div>
+    <div>
+      <div class="eyebrow">Why it travels</div>
+      <h2>Built to go international</h2>
+      <ul class="list">
+        <li><b>Exports a program, not people</b>Hotels overseas deliver exalte with locally certified Guides</li>
+        <li><b>Grows one hotel group at a time</b>One chain agreement can open properties across Asia-Pacific and beyond</li>
+        <li><b>Seasons flip</b>Southern winter is northern summer, so each season can be released twice and earn twice</li>
+        <li><b>Training online</b>No offices needed in each country</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow">How your model fits</div>
+      <h2>The house powers the Seasons</h2>
+      <table class="fit">
+        <tr><td>Your roster</td><td>The creators of each season, earning royalties, and the premium delivery team</td></tr>
+        <tr><td>Placements</td><td>Signature residencies at licensed hotels</td></tr>
+        <tr><td>Curated events</td><td>Seasonal launch events and PR moments</td></tr>
+        <tr><td>Representation</td><td>Creators gain national profile as their rituals run in hotels</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="eyebrow">What's different</div>
+      <h2>A gap in the market</h2>
+      <p class="lead" style="font-size:15.5px">Hotel wellness certification exists, but it assesses buildings, not programs. Hotel wellness deals are mostly digital (Peloton, Calm) or one brand at one property (Fluidform, KIC, Aqua Sculpt). We haven't found a licensed, seasonal, staff-delivered program for hotels that rewards its creators with royalties. Worth confirming with a proper market and trademark check.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The path</div>
+    <h2>Start small, then scale</h2>
+    <div class="path">
+      <div><i></i><h3>Pilot</h3><p>Build Winter "Rest" and license it to 3 properties in one boutique group, through a Reymond relationship.</p></div>
+      <div><i></i><h3>Prove</h3><p>Three months measuring package sales, guest feedback, staff confidence and renewals.</p></div>
+      <div><i></i><h3>Partner</h3><p>Take the results to a major group such as IHG, Accor or Hyatt.</p></div>
+      <div><i></i><h3>Expand</h3><p>New Zealand and the Pacific, then Asia, then the Northern Hemisphere.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="close">
+  <div class="wrap">
+    <div class="line">Most wellness brands grow one city at a time. exalte could grow one hotel group at a time, worldwide.</div>
+    <div class="sign">Mel</div>
+  </div>
+</div>
+
+<div class="fine wrap">A concept for discussion, prepared by Mel for Joanna · November 2026</div>
+
+</body>
+</html>
